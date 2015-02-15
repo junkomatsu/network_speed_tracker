@@ -1,10 +1,10 @@
 #!/bin/bash
 
-INTERNET_SPEED_TARGET_URL=""
-INTERNET_PING_TARGET_HOST=""
-LAN_SPEED_TARGET_URL=""
-LAN_PING_TARGET_HOST=""
-TRACKER_URL=""
+INTERNET_SPEED_TARGET_URL="http://54.178.131.196/dummy_10M.img"
+INTERNET_PING_TARGET_HOST="54.178.131.196"
+LAN_SPEED_TARGET_URL="http://10.1.0.10/dummy_10M.img"
+LAN_PING_TARGET_HOST="10.1.0.10"
+TRACKER_URL="https://network-speed-tracker.herokuapp.com/tracks"
 INTERVAL=10m
 
 username=`whoami`
@@ -24,8 +24,8 @@ while :
 do
 inet_speed=`curl -s -o /dev/null $INTERNET_SPEED_TARGET_URL  -w '%{speed_download}\n' | awk '{print ($1/1024/1024*8)}'`
 inet_ping=`ping -c 10 $INTERNET_PING_TARGET_HOST | tail -1 |  awk '{print $4}'| cut -d '/' -f 2`
-lan_speed=`curl -s -o /dev/null $INTERNET_SPEED_TARGET_URL  -w '%{speed_download}\n' | awk '{print ($1/1024/1024*8)}'`
-lan_ping=`ping -c 10 $INTERNET_PING_TARGET_HOST | tail -1 |  awk '{print $4}'| cut -d '/' -f 2`
+lan_speed=`curl -s -o /dev/null $LAN_SPEED_TARGET_URL  -w '%{speed_download}\n' | awk '{print ($1/1024/1024*8)}'`
+lan_ping=`ping -c 10 $LAN_PING_TARGET_HOST | tail -1 |  awk '{print $4}'| cut -d '/' -f 2`
 
 timestamp=`date "+%Y/%m/%d %T"`
 ssid=`$airport_cmd -I | grep ' SSID' | awk -F ': ' '{print $2}'`
