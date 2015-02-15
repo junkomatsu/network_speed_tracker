@@ -5,7 +5,7 @@ INTERNET_PING_TARGET_HOST="54.178.131.196"
 LAN_SPEED_TARGET_URL="http://10.1.0.10/dummy_10M.img"
 LAN_PING_TARGET_HOST="10.1.0.10"
 TRACKER_URL="https://network-speed-tracker.herokuapp.com/tracks"
-INTERVAL=10m
+INTERVAL=600
 
 username=`whoami`
 hostname=$HOSTNAME
